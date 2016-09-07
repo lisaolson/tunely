@@ -7,10 +7,17 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
+
   $.ajax({
     method: 'GET',
     url: '/api/albums',
     success: renderMultipleAlbums
+  });
+
+  $.ajax({
+    method: 'POST',
+    url: '/api/albums/:album_id/songs',
+    success: handleNewSongSubmit
   });
 
   $('#album-form form').on('submit', function(e) {
@@ -54,10 +61,16 @@ function renderAlbum(album) {
   $('#albums').prepend(html);
 }
 
-function handleNewSongSubmit() {
-  var newSongName = $('#songName').val();
-  var newSongTrackNumber = $('#trackNumber').val();
-  console.log(newSongName, newSongTrackNumber);
-  var albumId = $('#songModal').data('albumId');
-  console.log(albumId);
+function handleNewSongSubmit(e) {
+  e.preventDefault();
+  var $modal = $('#songModal');
+  var $songName = $modal.find('#songName');
+  var $trackNumber = $modal.find('#trackNumber');
+
 }
+
+  // var newSongName = $('#songName').val();
+  // var newSongTrackNumber = $('#trackNumber').val();
+  // console.log(newSongName, newSongTrackNumber);
+  // var albumId = $('#songModal').data('albumId');
+  // console.log(albumId);
